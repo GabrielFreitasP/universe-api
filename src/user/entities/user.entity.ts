@@ -1,4 +1,4 @@
-import { IsEmail, IsStrongPassword, IsUUID } from 'class-validator';
+import { IsEmail, IsString, IsStrongPassword, IsUUID } from 'class-validator';
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity('users')
@@ -12,6 +12,7 @@ export class User {
   id: string;
 
   @Column()
+  @IsString()
   name: string;
 
   @Column({ unique: true })
