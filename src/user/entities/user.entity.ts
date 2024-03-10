@@ -1,5 +1,6 @@
 import { IsEmail, IsString, IsStrongPassword, IsUUID } from 'class-validator';
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { CreateUserDto } from '../dto/create-user.dto';
 
 @Entity('users')
 export class User {
@@ -22,4 +23,8 @@ export class User {
   @Column()
   @IsStrongPassword()
   password: string;
+
+  static fromCreateDto({ name, email, password }: CreateUserDto): User {
+    return new User({ name, email, password });
+  }
 }

@@ -12,7 +12,7 @@ export const PostgresDataSourceOptions: DataSourceOptions = {
   migrations: [__dirname + '/migrations/*{.ts,.js}'],
   synchronize: true,
   migrationsRun: true,
-  logging: true,
+  logging: false,
   namingStrategy: new SnakeNamingStrategy(),
 };
 
