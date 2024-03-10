@@ -1,6 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { IsNotEmpty, IsString } from 'class-validator';
-import ApiSchema from 'src/commons/decorators/api-schema.decorator';
+import ApiSchema from '../../commons/decorators/api-schema.decorator';
 
 @ApiSchema({ name: 'UpdateUser' })
 export class UpdateUserDto {
@@ -14,5 +14,5 @@ export class UpdateUserDto {
     example: '123',
     required: false,
   })
-  password: string;
+  password: string | null;
 }

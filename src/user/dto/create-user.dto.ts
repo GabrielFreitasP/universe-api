@@ -1,6 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { IsEmail, IsNotEmpty, IsString } from 'class-validator';
-import ApiSchema from 'src/commons/decorators/api-schema.decorator';
+import ApiSchema from '../../commons/decorators/api-schema.decorator';
 
 @ApiSchema({ name: 'CreateUser' })
 export class CreateUserDto {

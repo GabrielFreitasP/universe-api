@@ -9,7 +9,7 @@ import { UpdateUserDto } from './dto/update-user.dto';
 import { Repository } from 'typeorm';
 import { User } from './entities/user.entity';
 import { InjectRepository } from '@nestjs/typeorm';
-import { LoggerService } from 'src/commons/logger/logger.service';
+import { LoggerService } from '../commons/logger/logger.service';
 import { ResponseUserDto } from './dto/response-user.dto';
 
 @Injectable()
