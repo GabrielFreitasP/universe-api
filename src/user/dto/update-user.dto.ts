@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsNotEmpty, IsString, IsStrongPassword } from 'class-validator';
+import { IsNotEmpty, IsString } from 'class-validator';
 import ApiSchema from 'src/commons/decorators/api-schema.decorator';
 
 @ApiSchema({ name: 'UpdateUser' })
@@ -10,6 +10,5 @@ export class UpdateUserDto {
   name: string;
 
   @ApiProperty({ description: 'Senha do usuário', example: '123' })
-  @IsStrongPassword()
   password: string;
 }

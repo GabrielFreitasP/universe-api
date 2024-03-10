@@ -1,10 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import {
-  IsEmail,
-  IsNotEmpty,
-  IsString,
-  IsStrongPassword,
-} from 'class-validator';
+import { IsEmail, IsNotEmpty, IsString } from 'class-validator';
 import ApiSchema from 'src/commons/decorators/api-schema.decorator';
 
 @ApiSchema({ name: 'CreateUser' })
@@ -21,6 +16,5 @@ export class CreateUserDto {
 
   @ApiProperty({ description: 'Senha do usuário', example: '123' })
   @IsNotEmpty()
-  @IsStrongPassword()
   password: string;
 }

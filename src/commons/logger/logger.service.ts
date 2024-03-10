@@ -42,6 +42,10 @@ export class LoggerService {
     this.logger.debug(message, metadata);
   }
 
+  info(message: string, metadata: any = {}) {
+    this.logger.info(message, metadata);
+  }
+
   verbose(message: string, metadata: any = {}) {
     this.logger.verbose(message, metadata);
   }

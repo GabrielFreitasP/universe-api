@@ -7,6 +7,7 @@ import {
   Param,
   Delete,
   HttpCode,
+  ParseUUIDPipe,
 } from '@nestjs/common';
 import { ApiResponse, ApiTags, ApiBody, ApiOperation } from '@nestjs/swagger';
 import { UserService } from './user.service';
@@ -31,27 +32,64 @@ export class UserController {
   @ApiResponse({ status: 400, description: 'Parâmetros inválidos' })
   @ApiResponse({ status: 409, description: 'Usuário já existe' })
   @ApiResponse({ status: 500, description: 'Erro interno' })
-  create(@Body() createUserDto: CreateUserDto) {
+  create(@Body() createUserDto: CreateUserDto): Promise<ResponseUserDto> {
     return this.userService.create(createUserDto);
   }
 
   @Get()
-  findAll() {
+  @HttpCode(200)
+  @ApiOperation({ summary: 'Busca lista de usuários' })
+  @ApiResponse({
+    status: 200,
+    description: 'Usuários encontrados',
+    type: ResponseUserDto,
+    isArray: true,
+  })
+  @ApiResponse({ status: 500, description: 'Erro interno' })
+  findAll(): Promise<ResponseUserDto[]> {
     return this.userService.findAll();
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.userService.findOne(+id);
+  @HttpCode(200)
+  @ApiOperation({ summary: 'Busca usuário por id' })
+  @ApiResponse({ status: 200, description: 'Usuário encontrado' })
+  @ApiResponse({ status: 400, description: 'Parâmetros inválidos' })
+  @ApiResponse({ status: 404, description: 'Usuário não encontrado' })
+  @ApiResponse({ status: 500, description: 'Erro interno' })
+  findOne(
+    @Param('id', new ParseUUIDPipe()) id: string,
+  ): Promise<ResponseUserDto> {
+    return this.userService.findOne(id);
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
-    return this.userService.update(+id, updateUserDto);
+  @HttpCode(200)
+  @ApiBody({ type: UpdateUserDto })
+  @ApiOperation({ summary: 'Atualizar usuário pelo id' })
+  @ApiResponse({
+    status: 200,
+    description: 'Usuário atualizado',
+    type: ResponseUserDto,
+  })
+  @ApiResponse({ status: 400, description: 'Parâmetros inválidos' })
+  @ApiResponse({ status: 404, description: 'Usuário não encontrado' })
+  @ApiResponse({ status: 500, description: 'Erro interno' })
+  update(
+    @Param('id', new ParseUUIDPipe()) id: string,
+    @Body() updateUserDto: UpdateUserDto,
+  ): Promise<ResponseUserDto> {
+    return this.userService.update(id, updateUserDto);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.userService.remove(+id);
+  @HttpCode(204)
+  @ApiOperation({ summary: 'Deletar um usuário' })
+  @ApiResponse({ status: 204, description: 'Usuário deletado' })
+  @ApiResponse({ status: 400, description: 'Parâmetros inválidos' })
+  @ApiResponse({ status: 404, description: 'Usuário não encontrado' })
+  @ApiResponse({ status: 500, description: 'Erro interno' })
+  remove(@Param('id', new ParseUUIDPipe()) id: string): Promise<void> {
+    return this.userService.remove(id);
   }
 }

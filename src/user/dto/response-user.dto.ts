@@ -27,7 +27,11 @@ export class ResponseUserDto {
   @IsEmail()
   email: string;
 
-  static fromEntity({ id, name, email }: User): ResponseUserDto {
-    return new ResponseUserDto({ id, name, email });
+  @ApiProperty({ description: 'Senha do usuário', example: '123' })
+  @IsNotEmpty()
+  password: string;
+
+  static fromEntity({ id, name, email, password }: User): ResponseUserDto {
+    return new ResponseUserDto({ id, name, email, password });
   }
 }
