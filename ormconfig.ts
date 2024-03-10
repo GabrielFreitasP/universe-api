@@ -9,7 +9,7 @@ export const PostgresDataSourceOptions: DataSourceOptions = {
   password: process.env.DB_PASS || 'sub-universe',
   database: process.env.DB_NAME || 'sub-universe',
   entities: [__dirname + '/**/*.entity{.ts,.js}'],
-  migrations: [__dirname + '/migrations/*{.ts,.js}'],
+  migrations: [__dirname + '/**/migrations/*{.ts,.js}'],
   synchronize: true,
   migrationsRun: true,
   logging: true,
