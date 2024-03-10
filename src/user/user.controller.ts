@@ -23,7 +23,7 @@ export class UserController {
   @Post()
   @HttpCode(201)
   @ApiBody({ type: CreateUserDto })
-  @ApiOperation({ summary: 'Cria um novo usuário' })
+  @ApiOperation({ summary: 'Cria novo usuário' })
   @ApiResponse({
     status: 201,
     description: 'Usuário criado',
@@ -52,7 +52,7 @@ export class UserController {
 
   @Get(':id')
   @HttpCode(200)
-  @ApiOperation({ summary: 'Busca usuário por id' })
+  @ApiOperation({ summary: 'Busca usuário pelo id' })
   @ApiResponse({ status: 200, description: 'Usuário encontrado' })
   @ApiResponse({ status: 400, description: 'Parâmetros inválidos' })
   @ApiResponse({ status: 404, description: 'Usuário não encontrado' })
@@ -66,7 +66,7 @@ export class UserController {
   @Patch(':id')
   @HttpCode(200)
   @ApiBody({ type: UpdateUserDto })
-  @ApiOperation({ summary: 'Atualizar usuário pelo id' })
+  @ApiOperation({ summary: 'Atualiza usuário pelo id' })
   @ApiResponse({
     status: 200,
     description: 'Usuário atualizado',
@@ -84,7 +84,7 @@ export class UserController {
 
   @Delete(':id')
   @HttpCode(204)
-  @ApiOperation({ summary: 'Deletar um usuário' })
+  @ApiOperation({ summary: 'Deleta usuário pelo id' })
   @ApiResponse({ status: 204, description: 'Usuário deletado' })
   @ApiResponse({ status: 400, description: 'Parâmetros inválidos' })
   @ApiResponse({ status: 404, description: 'Usuário não encontrado' })

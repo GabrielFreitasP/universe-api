@@ -9,6 +9,10 @@ export class UpdateUserDto {
   @IsString()
   name: string;
 
-  @ApiProperty({ description: 'Senha do usuário', example: '123' })
+  @ApiProperty({
+    description: 'Senha do usuário',
+    example: '123',
+    required: false,
+  })
   password: string;
 }
