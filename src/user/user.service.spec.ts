@@ -8,6 +8,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { getRepositoryToken } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 
+import { ConfigurationService } from '../commons/config/configuration.service';
 import { LoggerService } from '../commons/logger/logger.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { ResponseUserDto } from './dto/response-user.dto';
@@ -25,6 +26,8 @@ describe('UserService', () => {
       name: faker.person.firstName(),
       email: faker.internet.email(),
       password: faker.internet.password(),
+      active: faker.datatype.boolean(),
+      roles: 'admin,user',
       createdAt: faker.date.anytime(),
       updatedAt: faker.date.anytime(),
       deletedAt: null,
@@ -42,6 +45,8 @@ describe('UserService', () => {
   });
 
   beforeEach(async () => {
+    jest.clearAllMocks();
+
     const module: TestingModule = await Test.createTestingModule({
       providers: [
         UserService,
@@ -49,6 +54,13 @@ describe('UserService', () => {
         {
           provide: getRepositoryToken(User),
           useClass: Repository,
+        },
+        {
+          provide: ConfigurationService,
+          useValue: {
+            loggerLevel: 'silent',
+            loggerLabel: 'testing',
+          },
         },
       ],
     }).compile();

@@ -21,11 +21,7 @@ export class AuthController {
     description: 'Access token',
     type: ResponseLoginDto,
   })
-  async login(@Request() req): Promise<{
-    email: string;
-    accessToken: string;
-    expiresIn: string;
-  }> {
+  async login(@Request() req) {
     return this.authService.login(req.user);
   }
 }

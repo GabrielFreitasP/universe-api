@@ -1,8 +1,9 @@
-import configuration, {
-  DatabaseConfig,
-} from 'src/commons/config/configuration';
 import { DataSource, DataSourceOptions } from 'typeorm';
 import { SnakeNamingStrategy } from 'typeorm-naming-strategies';
+
+import configuration, {
+  DatabaseConfig,
+} from './src/commons/config/configuration';
 
 export const PostgresDataSourceOptions = (
   db: DatabaseConfig,

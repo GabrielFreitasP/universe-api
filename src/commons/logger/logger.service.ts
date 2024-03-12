@@ -26,27 +26,23 @@ export class LoggerService {
     });
   }
 
-  log(message: string, metadata: any = {}) {
-    this.logger.info(message, metadata);
-  }
-
-  error(message: string, metadata: any = {}) {
+  error(message: string, metadata: any = {}): void {
     this.logger.error(message, metadata);
   }
 
-  warn(message: string, metadata: any = {}) {
+  warn(message: string, metadata: any = {}): void {
     this.logger.warn(message, metadata);
   }
 
-  debug(message: string, metadata: any = {}) {
+  debug(message: string, metadata: any = {}): void {
     this.logger.debug(message, metadata);
   }
 
-  info(message: string, metadata: any = {}) {
+  info(message: string, metadata: any = {}): void {
     this.logger.info(message, metadata);
   }
 
-  verbose(message: string, metadata: any = {}) {
+  verbose(message: string, metadata: any = {}): void {
     this.logger.verbose(message, metadata);
   }
 

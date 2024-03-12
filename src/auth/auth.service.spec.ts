@@ -4,6 +4,7 @@ import { JwtService } from '@nestjs/jwt';
 import { Test, TestingModule } from '@nestjs/testing';
 import * as bcrypt from 'bcrypt';
 
+import { ConfigurationService } from '../commons/config/configuration.service';
 import { User } from '../user/entities/user.entity';
 import { UserService } from '../user/user.service';
 import { AuthService } from './auth.service';
@@ -33,7 +34,7 @@ describe('AuthService', () => {
       email: faker.internet.email(),
       password: faker.internet.password(),
       active: faker.datatype.boolean(),
-      roles: 'admin',
+      roles: 'admin,user',
     });
     accessTokenMock = 'accessToken';
 
@@ -50,6 +51,12 @@ describe('AuthService', () => {
           provide: JwtService,
           useValue: {
             sign: signMock,
+          },
+        },
+        {
+          provide: ConfigurationService,
+          useValue: {
+            authJwtExpiresIn: authJwtExpiresInMock,
           },
         },
       ],
