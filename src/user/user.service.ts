@@ -4,13 +4,14 @@ import {
   InternalServerErrorException,
   NotFoundException,
 } from '@nestjs/common';
-import { CreateUserDto } from './dto/create-user.dto';
-import { UpdateUserDto } from './dto/update-user.dto';
-import { Repository } from 'typeorm';
-import { User } from './entities/user.entity';
 import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
+
 import { LoggerService } from '../commons/logger/logger.service';
+import { CreateUserDto } from './dto/create-user.dto';
 import { ResponseUserDto } from './dto/response-user.dto';
+import { UpdateUserDto } from './dto/update-user.dto';
+import { User } from './entities/user.entity';
 
 @Injectable()
 export class UserService {
@@ -79,6 +80,30 @@ export class UserService {
 
       this.logger.error(
         `Erro ao buscar usuário pelo id '${id}': '${error.message}'.`,
+      );
+      throw new InternalServerErrorException('Error to find one user');
+    }
+  }
+
+  async findOneByEmail(email: string): Promise<User> {
+    try {
+      this.logger.debug(`Buscando usuários pelo email '${email}'.`);
+
+      const user = await this.repository.findOneBy({ email });
+
+      if (!user) {
+        this.logger.warn(`Nenhum usuário encontrado pelo email '${email}'.`);
+        throw new NotFoundException('User not found');
+      }
+
+      this.logger.debug(`Usuário '${user.email}' encontrado.`);
+
+      return user;
+    } catch (error) {
+      if (error instanceof NotFoundException) throw error;
+
+      this.logger.error(
+        `Erro ao buscar usuário pelo email '${email}': '${error.message}'.`,
       );
       throw new InternalServerErrorException('Error to find one user');
     }

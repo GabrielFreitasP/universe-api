@@ -1,17 +1,17 @@
-import * as winston from 'winston';
 import { Injectable } from '@nestjs/common';
+import * as winston from 'winston';
+
+import { ConfigurationService } from '../config/configuration.service';
 
 @Injectable()
 export class LoggerService {
   private logger: winston.Logger;
 
-  constructor() {
+  constructor(configurationService: ConfigurationService) {
     this.logger = winston.createLogger({
-      level: process.env.LOGGER_LEVEL || 'debug',
+      level: configurationService.loggerLevel,
       format: winston.format.combine(
-        winston.format.label({
-          label: process.env.LOGGER_LABEL || 'development',
-        }),
+        winston.format.label({ label: configurationService.loggerLabel }),
         winston.format.colorize(),
         winston.format.timestamp(),
         winston.format.printf((info) => {
@@ -50,7 +50,6 @@ export class LoggerService {
     this.logger.verbose(message, metadata);
   }
 
-  // eslint-disable-next-line @typescript-eslint/ban-types
   json(json: object): void {
     this.logger.info({ json });
   }

@@ -1,18 +1,19 @@
-import { Test, TestingModule } from '@nestjs/testing';
+import { faker } from '@faker-js/faker';
 import {
   ConflictException,
   InternalServerErrorException,
   NotFoundException,
 } from '@nestjs/common';
-import { UserService } from './user.service';
-import { Repository } from 'typeorm';
+import { Test, TestingModule } from '@nestjs/testing';
 import { getRepositoryToken } from '@nestjs/typeorm';
-import { User } from './entities/user.entity';
+import { Repository } from 'typeorm';
+
 import { LoggerService } from '../commons/logger/logger.service';
-import { ResponseUserDto } from './dto/response-user.dto';
 import { CreateUserDto } from './dto/create-user.dto';
+import { ResponseUserDto } from './dto/response-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
-import { faker } from '@faker-js/faker';
+import { User } from './entities/user.entity';
+import { UserService } from './user.service';
 
 describe('UserService', () => {
   let service: UserService;

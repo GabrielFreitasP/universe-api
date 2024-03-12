@@ -1,4 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
+
 import ApiSchema from '../decorators/api-schema.decorator';
 
 @ApiSchema({ name: 'Error' })

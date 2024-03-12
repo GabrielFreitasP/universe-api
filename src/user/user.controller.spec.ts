@@ -1,11 +1,12 @@
+import { faker } from '@faker-js/faker';
+import { NotFoundException } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
+
+import { CreateUserDto } from './dto/create-user.dto';
+import { ResponseUserDto } from './dto/response-user.dto';
+import { UpdateUserDto } from './dto/update-user.dto';
 import { UserController } from './user.controller';
 import { UserService } from './user.service';
-import { ResponseUserDto } from './dto/response-user.dto';
-import { CreateUserDto } from './dto/create-user.dto';
-import { UpdateUserDto } from './dto/update-user.dto';
-import { NotFoundException } from '@nestjs/common';
-import { faker } from '@faker-js/faker';
 
 describe('UserController', () => {
   let controller: UserController;

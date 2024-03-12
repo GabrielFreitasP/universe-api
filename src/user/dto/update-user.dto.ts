@@ -1,5 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { IsNotEmpty, IsString } from 'class-validator';
+
 import ApiSchema from '../../commons/decorators/api-schema.decorator';
 
 @ApiSchema({ name: 'UpdateUser' })

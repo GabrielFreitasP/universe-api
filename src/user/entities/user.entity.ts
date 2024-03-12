@@ -10,6 +10,8 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 
+type Roles = 'admin' | 'user';
+
 @Entity('users')
 export class User {
   constructor(partial: Partial<User>) {
@@ -28,6 +30,12 @@ export class User {
   @Column()
   password: string;
 
+  @Column()
+  active: boolean;
+
+  @Column()
+  roles: Roles;
+
   @CreateDateColumn()
   createdAt: Date;
 
@@ -39,7 +47,7 @@ export class User {
 
   @BeforeUpdate()
   @BeforeInsert()
-  async setPassword(password: string) {
+  async setPassword(password: string): Promise<void> {
     const salt = await bcrypt.genSalt();
     this.password = await bcrypt.hash(password || this.password, salt);
   }
