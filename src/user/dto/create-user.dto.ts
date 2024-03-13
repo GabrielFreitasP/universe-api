@@ -1,8 +1,9 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsEmail, IsIn, IsNotEmpty, IsString } from 'class-validator';
+import { IsEmail, IsNotEmpty, IsString } from 'class-validator';
+import { AuthRolesEnum } from 'src/auth/enums/auth-roles.enum';
+import { IsEnumCombination } from 'src/commons/decorators/is-enum-combination.decorator';
 
 import ApiSchema from '../../commons/decorators/api-schema.decorator';
-import { UserRoles } from '../entities/user.entity';
 
 @ApiSchema({ name: 'CreateUser' })
 export class CreateUserDto {
@@ -22,9 +23,9 @@ export class CreateUserDto {
 
   @ApiProperty({
     description: 'Regras de permissão do usuário',
-    example: 'admin',
+    example: AuthRolesEnum.ADMIN,
   })
   @IsNotEmpty()
-  @IsIn(['admin', 'user'])
-  roles: UserRoles;
+  @IsEnumCombination(AuthRolesEnum)
+  roles: string;
 }

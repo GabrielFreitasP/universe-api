@@ -13,6 +13,7 @@ async function bootstrap(): Promise<void> {
     .setTitle('Universe Sub API')
     .setDescription('API for stock and orders management')
     .setVersion('1.0')
+    .addBearerAuth({ in: 'header', type: 'http' })
     .build();
 
   const document = SwaggerModule.createDocument(app, options);

@@ -1,8 +1,9 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsIn, IsString } from 'class-validator';
+import { IsString } from 'class-validator';
+import { AuthRolesEnum } from 'src/auth/enums/auth-roles.enum';
 
 import ApiSchema from '../../commons/decorators/api-schema.decorator';
-import { UserRoles } from '../entities/user.entity';
+import { IsEnumCombination } from '../../commons/decorators/is-enum-combination.decorator';
 
 @ApiSchema({ name: 'UpdateUser' })
 export class UpdateUserDto {
@@ -24,9 +25,9 @@ export class UpdateUserDto {
 
   @ApiProperty({
     description: 'Regras de permissão do usuário',
-    example: 'admin',
+    example: AuthRolesEnum.ADMIN,
     required: false,
   })
-  @IsIn(['admin', 'user', null])
-  roles: UserRoles | null;
+  @IsEnumCombination(AuthRolesEnum)
+  roles: string | null;
 }

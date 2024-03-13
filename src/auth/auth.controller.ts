@@ -8,7 +8,7 @@ import { ResponseLoginDto } from './dto/response-login.dto';
 import { LocalAuthGuard } from './guards/local-auth.guard';
 
 @Controller('api/v1/auth')
-@ApiTags('login')
+@ApiTags('Autenticação')
 export class AuthController {
   constructor(private authService: AuthService) {}
 

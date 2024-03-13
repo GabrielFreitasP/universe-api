@@ -10,6 +10,7 @@ import configuration from './commons/config/configuration';
 import { ConfigurationModule } from './commons/config/configuration.module';
 import { ConfigurationService } from './commons/config/configuration.service';
 import { LoggerModule } from './commons/logger/logger.module';
+import { ProductModule } from './product/product.module';
 import { UserModule } from './user/user.module';
 
 @Module({
@@ -34,6 +35,7 @@ import { UserModule } from './user/user.module';
     LoggerModule,
     AuthModule,
     UserModule,
+    ProductModule,
   ],
   controllers: [AppController],
   providers: [AppService],

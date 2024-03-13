@@ -2,14 +2,15 @@ import { ApiProperty } from '@nestjs/swagger';
 import {
   IsBoolean,
   IsEmail,
-  IsIn,
   IsNotEmpty,
   IsString,
   IsUUID,
 } from 'class-validator';
+import { AuthRolesEnum } from 'src/auth/enums/auth-roles.enum';
+import { IsEnumCombination } from 'src/commons/decorators/is-enum-combination.decorator';
 
 import ApiSchema from '../../commons/decorators/api-schema.decorator';
-import { User, UserRoles } from '../entities/user.entity';
+import { User } from '../entities/user.entity';
 
 @ApiSchema({ name: 'User' })
 export class ResponseUserDto {
@@ -44,11 +45,11 @@ export class ResponseUserDto {
 
   @ApiProperty({
     description: 'Regras de permissão do usuário',
-    example: 'admin',
+    example: AuthRolesEnum.ADMIN,
   })
   @IsNotEmpty()
-  @IsIn(['admin', 'user'])
-  roles: UserRoles;
+  @IsEnumCombination(AuthRolesEnum)
+  roles: string;
 
   @ApiProperty({ description: 'Usuário ativo', example: true })
   @IsNotEmpty()
