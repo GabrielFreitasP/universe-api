@@ -10,6 +10,8 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 
+export type UserRoles = 'admin' | 'user';
+
 @Entity('users')
 export class User {
   constructor(partial: Partial<User>) {
@@ -28,11 +30,11 @@ export class User {
   @Column()
   password: string;
 
-  @Column()
+  @Column({ default: true })
   active: boolean;
 
   @Column()
-  roles: string;
+  roles: UserRoles;
 
   @CreateDateColumn()
   createdAt: Date;

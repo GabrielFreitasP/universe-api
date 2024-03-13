@@ -5,8 +5,8 @@ import { ConfigService } from '@nestjs/config';
 export class ConfigurationService {
   constructor(private configService: ConfigService) {}
 
-  get port(): number {
-    return parseInt(this.configService.get('port'));
+  get apiPort(): number {
+    return parseInt(this.configService.get('api.port'));
   }
 
   get loggerLevel(): string {

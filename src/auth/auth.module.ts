@@ -3,6 +3,7 @@ import { JwtModule } from '@nestjs/jwt';
 import { PassportModule } from '@nestjs/passport';
 
 import configuration from '../commons/config/configuration';
+import { ConfigurationModule } from '../commons/config/configuration.module';
 import { UserModule } from '../user/user.module';
 import { AuthController } from './auth.controller';
 import { AuthService } from './auth.service';
@@ -19,6 +20,7 @@ const authConfig = configuration().auth;
       signOptions: { expiresIn: `${authConfig.jwt.expiresIn}s` },
     }),
     UserModule,
+    ConfigurationModule,
   ],
   providers: [AuthService, LocalStrategy, JwtStrategy],
   exports: [AuthService],

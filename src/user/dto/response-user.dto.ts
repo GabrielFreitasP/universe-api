@@ -1,8 +1,15 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsEmail, IsNotEmpty, IsString, IsUUID } from 'class-validator';
+import {
+  IsBoolean,
+  IsEmail,
+  IsIn,
+  IsNotEmpty,
+  IsString,
+  IsUUID,
+} from 'class-validator';
 
 import ApiSchema from '../../commons/decorators/api-schema.decorator';
-import { User } from '../entities/user.entity';
+import { User, UserRoles } from '../entities/user.entity';
 
 @ApiSchema({ name: 'User' })
 export class ResponseUserDto {
@@ -23,16 +30,46 @@ export class ResponseUserDto {
   @IsString()
   name: string;
 
-  @ApiProperty({ description: 'E-mail do usuário', example: 'joão@domain.com' })
+  @ApiProperty({ description: 'E-mail do usuário', example: 'joao@domain.com' })
   @IsNotEmpty()
   @IsEmail()
   email: string;
 
-  @ApiProperty({ description: 'Senha do usuário', example: '123' })
+  @ApiProperty({
+    description: 'Senha do usuário',
+    example: '$2b$10$TE2l9Ym2N.A7G.nW9DbnRuTjg4OM2DVTZBMP4Ih145Du2UeumGCna',
+  })
   @IsNotEmpty()
   password: string;
 
-  static fromEntity({ id, name, email, password }: User): ResponseUserDto {
-    return new ResponseUserDto({ id, name, email, password });
+  @ApiProperty({
+    description: 'Regras de permissão do usuário',
+    example: 'admin',
+  })
+  @IsNotEmpty()
+  @IsIn(['admin', 'user'])
+  roles: UserRoles;
+
+  @ApiProperty({ description: 'Usuário ativo', example: true })
+  @IsNotEmpty()
+  @IsBoolean()
+  active: boolean;
+
+  static fromEntity({
+    id,
+    name,
+    email,
+    password,
+    roles,
+    active,
+  }: User): ResponseUserDto {
+    return new ResponseUserDto({
+      id,
+      name,
+      email,
+      password,
+      roles,
+      active,
+    });
   }
 }

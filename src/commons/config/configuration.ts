@@ -16,22 +16,30 @@ export type DatabaseConfig = {
   migrationsRun: boolean;
 };
 
+type JwtConfig = {
+  secret: string;
+  expiresIn: number;
+};
+
 type AuthConfig = {
-  jwt: {
-    secret: string;
-    expiresIn: number;
-  };
+  jwt: JwtConfig;
+};
+
+type ApiConfig = {
+  port: number;
 };
 
 export type Config = {
-  port: number;
+  api: ApiConfig;
   logger: LoggerConfig;
   database: DatabaseConfig;
   auth: AuthConfig;
 };
 
 export default (): Config => ({
-  port: parseInt(process.env.PORT) || 3000,
+  api: {
+    port: parseInt(process.env.API_PORT) || 3000,
+  },
   logger: {
     level: process.env.LOGGER_LEVEL || 'debug',
     label: process.env.LOGGER_LABEL || 'development',

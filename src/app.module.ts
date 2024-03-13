@@ -5,6 +5,7 @@ import { PostgresDataSourceOptions } from 'ormconfig';
 
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+import { AuthModule } from './auth/auth.module';
 import configuration from './commons/config/configuration';
 import { ConfigurationModule } from './commons/config/configuration.module';
 import { ConfigurationService } from './commons/config/configuration.service';
@@ -31,6 +32,7 @@ import { UserModule } from './user/user.module';
     }),
     ConfigurationModule,
     LoggerModule,
+    AuthModule,
     UserModule,
   ],
   controllers: [AppController],

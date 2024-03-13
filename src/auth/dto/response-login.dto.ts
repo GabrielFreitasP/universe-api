@@ -1,9 +1,12 @@
 import { ApiProperty } from '@nestjs/swagger';
 
+import ApiSchema from '../../commons/decorators/api-schema.decorator';
+
+@ApiSchema({ name: 'Auth' })
 export class ResponseLoginDto {
   @ApiProperty({
     description: 'E-mail autenticado',
-    example: 'admin@domain.com',
+    example: 'joao@domain.com',
   })
   email: string;
 
