@@ -8,7 +8,7 @@ import ApiSchema from '../../commons/decorators/api-schema.decorator';
 export class RequestLoginDto {
   @ApiProperty({
     description: 'E-mail para autenticação',
-    example: 'joao@domain.com',
+    example: 'admin@universosub.com.br',
   })
   @IsEmail()
   email: string;

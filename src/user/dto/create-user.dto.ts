@@ -7,12 +7,12 @@ import { IsEnumCombination } from '../../commons/decorators/is-enum-combination.
 
 @ApiSchema({ name: 'CreateUser' })
 export class CreateUserDto {
-  @ApiProperty({ description: 'Nome do usuário', example: 'João' })
+  @ApiProperty({ description: 'Nome do usuário', example: 'admin' })
   @IsNotEmpty()
   @IsString()
   name: string;
 
-  @ApiProperty({ description: 'E-mail do usuário', example: 'joao@domain.com' })
+  @ApiProperty({ description: 'E-mail do usuário', example: 'admin@universosub.com.br' })
   @IsNotEmpty()
   @IsEmail()
   email: string;

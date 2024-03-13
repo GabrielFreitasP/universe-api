@@ -9,7 +9,7 @@ import { IsEnumCombination } from '../../commons/decorators/is-enum-combination.
 export class UpdateUserDto {
   @ApiProperty({
     description: 'Nome do usuário',
-    example: 'João',
+    example: 'admin',
     required: false,
   })
   @IsString()

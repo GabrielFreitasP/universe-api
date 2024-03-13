@@ -6,7 +6,7 @@ import ApiSchema from '../../commons/decorators/api-schema.decorator';
 export class ResponseLoginDto {
   @ApiProperty({
     description: 'E-mail autenticado',
-    example: 'joao@domain.com',
+    example: 'admin@universosub.com.br',
   })
   email: string;
 
