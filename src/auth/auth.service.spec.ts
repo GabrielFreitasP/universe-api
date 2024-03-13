@@ -1,5 +1,5 @@
 import { faker } from '@faker-js/faker';
-import { UnauthorizedException } from '@nestjs/common';
+import { NotFoundException, UnauthorizedException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { Test, TestingModule } from '@nestjs/testing';
 import * as bcrypt from 'bcrypt';
@@ -91,7 +91,7 @@ describe('AuthService', () => {
     });
 
     it('should throw UnauthorizedException for invalid username or password', async () => {
-      findOneByEmailMock.mockResolvedValueOnce(undefined);
+      findOneByEmailMock.mockRejectedValueOnce(new NotFoundException());
 
       const promise = authService.validateUser(
         userMock.email,

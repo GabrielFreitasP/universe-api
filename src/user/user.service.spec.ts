@@ -8,6 +8,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { getRepositoryToken } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 
+import { AuthRolesEnum } from '../auth/enums/auth-roles.enum';
 import { ConfigurationService } from '../commons/config/configuration.service';
 import { LoggerService } from '../commons/logger/logger.service';
 import { CreateUserDto } from './dto/create-user.dto';
@@ -27,7 +28,7 @@ describe('UserService', () => {
       email: faker.internet.email(),
       password: faker.internet.password(),
       active: faker.datatype.boolean(),
-      roles: 'admin,user',
+      roles: AuthRolesEnum.ADMIN,
       createdAt: faker.date.anytime(),
       updatedAt: faker.date.anytime(),
       deletedAt: null,
@@ -37,11 +38,13 @@ describe('UserService', () => {
     name: faker.person.firstName(),
     email: faker.internet.email(),
     password: faker.internet.password(),
+    roles: AuthRolesEnum.ADMIN,
   });
 
   const createFakeUpdateUserDto = (): UpdateUserDto => ({
     name: faker.person.firstName(),
     password: null,
+    roles: AuthRolesEnum.ADMIN,
   });
 
   beforeEach(async () => {
@@ -95,11 +98,7 @@ describe('UserService', () => {
     });
 
     it('should throw InternalServerErrorException on other errors', async () => {
-      const createUserDto: CreateUserDto = {
-        name: faker.person.firstName(),
-        email: faker.internet.email(),
-        password: faker.internet.password(),
-      };
+      const createUserDto = createFakeCreateUserDto();
 
       jest.spyOn(repository, 'save').mockRejectedValue(new Error());
 

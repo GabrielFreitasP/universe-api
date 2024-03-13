@@ -1,7 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { IsString } from 'class-validator';
-import { AuthRolesEnum } from 'src/auth/enums/auth-roles.enum';
 
+import { AuthRolesEnum } from '../../auth/enums/auth-roles.enum';
 import ApiSchema from '../../commons/decorators/api-schema.decorator';
 import { IsEnumCombination } from '../../commons/decorators/is-enum-combination.decorator';
 

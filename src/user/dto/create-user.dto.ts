@@ -1,9 +1,9 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { IsEmail, IsNotEmpty, IsString } from 'class-validator';
-import { AuthRolesEnum } from 'src/auth/enums/auth-roles.enum';
-import { IsEnumCombination } from 'src/commons/decorators/is-enum-combination.decorator';
 
+import { AuthRolesEnum } from '../../auth/enums/auth-roles.enum';
 import ApiSchema from '../../commons/decorators/api-schema.decorator';
+import { IsEnumCombination } from '../../commons/decorators/is-enum-combination.decorator';
 
 @ApiSchema({ name: 'CreateUser' })
 export class CreateUserDto {

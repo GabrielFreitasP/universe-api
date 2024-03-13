@@ -2,6 +2,7 @@ import { faker } from '@faker-js/faker';
 import { NotFoundException } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
 
+import { AuthRolesEnum } from '../auth/enums/auth-roles.enum';
 import { CreateUserDto } from './dto/create-user.dto';
 import { ResponseUserDto } from './dto/response-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
@@ -16,11 +17,13 @@ describe('UserController', () => {
     name: faker.person.firstName(),
     email: faker.internet.email(),
     password: faker.internet.password(),
+    roles: AuthRolesEnum.ADMIN,
   });
 
   const createFakeUpdateUserDto = (): UpdateUserDto => ({
     name: faker.person.firstName(),
     password: null,
+    roles: AuthRolesEnum.ADMIN,
   });
 
   const createFakeResponseUserDto = (): ResponseUserDto => ({
@@ -28,6 +31,8 @@ describe('UserController', () => {
     name: faker.person.firstName(),
     email: faker.internet.email(),
     password: faker.internet.password(),
+    roles: AuthRolesEnum.ADMIN,
+    active: true,
   });
 
   beforeEach(async () => {
