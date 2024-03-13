@@ -1,13 +1,18 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Get, HttpCode, UseGuards } from '@nestjs/common';
+import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 
 import { AppService } from './app.service';
 
-@Controller()
+@Controller('api')
+@ApiTags('API')
 export class AppController {
   constructor(private readonly appService: AppService) {}
 
   @Get()
-  getHello(): string {
-    return this.appService.getHello();
+  @HttpCode(200)
+  @ApiOperation({ summary: 'Verifica a situação da API' })
+  @ApiResponse({ status: 200, description: 'API em execução' })
+  getApiStatus(): { status: string } {
+    return this.appService.getApiStatus();
   }
 }
