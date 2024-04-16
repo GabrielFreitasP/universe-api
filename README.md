@@ -1,6 +1,8 @@
 # Universe API
 
-A RESTful API built with Node.js, TypeScript, Nest.js, TypeORM, PostgreSQL, Docker, Docker Compose, Swagger, and Jest for managing restaurant-related CRUD operations.
+[![Coverage Status](https://coveralls.io/repos/github/GabrielFreitasP/universe-api/badge.svg)](https://coveralls.io/github/GabrielFreitasP/universe-api)
+
+Uma API RESTful construída com Node.js, TypeScript, Nest.js, TypeORM, PostgreSQL, Docker, Docker Compose, Swagger e Jest para gerenciar operações CRUD relacionadas a restaurantes.
 
 ## Pré-requisitos
 
